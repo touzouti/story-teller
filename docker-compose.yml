@@ -1,0 +1,18 @@
+services:
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    container_name: story-teller-backend
+    env_file:
+      - .env
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    container_name: story-teller
+    ports:
+      - "4173:8080"
+    depends_on:
+      - backend
+    env_file:
+      - .env
